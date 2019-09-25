@@ -1,0 +1,8 @@
+{
+  "port": 8080,
+  "idleTimeout": 20,
+  "tcpKeepAlive": true,
+  "reuseAddress": true,
+  "reusePort": true
+}
+
