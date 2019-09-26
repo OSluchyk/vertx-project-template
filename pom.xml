@@ -68,6 +68,14 @@
       <artifactId>log4j-core</artifactId>
     </dependency>
 
+    <!--Performance tests-->
+    <dependency>
+      <groupId>io.gatling.highcharts</groupId>
+      <artifactId>gatling-charts-highcharts</artifactId>
+      <version>3.0.3</version>
+      <scope>test</scope>
+    </dependency>
+
     <!--Unit tests-->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -86,6 +94,16 @@
       <version>${junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+
   </dependencies>
 
   <build>
@@ -139,6 +157,17 @@
             <argument>run</argument>
             <argument>${main.verticle}</argument>
           </arguments>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>3.0.3</version>
+        <configuration>
+          <simulationsFolder>${project.basedir}/src/gatling/scala</simulationsFolder> <!-- where the simulations to be compiled are located -->
+          <resourcesFolder>${project.basedir}/src/gatling/resources</resourcesFolder> <!-- where the test resources are located -->
+          <resultsFolder>${project.basedir}/target/gatling</resultsFolder>
         </configuration>
       </plugin>
     </plugins>
