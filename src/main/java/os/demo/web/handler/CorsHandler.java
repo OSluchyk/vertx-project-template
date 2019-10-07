@@ -28,7 +28,7 @@ public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
   private final Set<String> allowedHeaders = new LinkedHashSet<>();
   private final Set<String> exposedHeaders = new LinkedHashSet<>();
 
-  public static io.vertx.ext.web.handler.CorsHandler create() {
+  public static io.vertx.ext.web.handler.CorsHandler configure() {
     return new CorsHandler("*")
       .allowCredentials(true)
       .allowedMethod(HttpMethod.GET)

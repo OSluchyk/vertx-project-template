@@ -30,7 +30,6 @@ public class VertxTest {
         context.completeNow();
       })));
 
-    //assertions...
   }
 
 }
