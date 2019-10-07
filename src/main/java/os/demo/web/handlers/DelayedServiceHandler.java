@@ -1,4 +1,4 @@
-package os.demo.web.handler;
+package os.demo.web.handlers;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;

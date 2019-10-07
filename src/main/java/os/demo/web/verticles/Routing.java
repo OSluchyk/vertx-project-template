@@ -1,12 +1,13 @@
-package os.demo.web;
+package os.demo.web.verticles;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
-import os.demo.web.handler.CorsHandler;
-import os.demo.web.handler.DelayedServiceHandler;
+import os.demo.web.handlers.CorsHandler;
+import os.demo.web.handlers.DelayedServiceHandler;
 
-import static os.demo.web.handler.Routes.*;
+import static os.demo.web.verticles.Routing.Endpoints.*;
+
 
 public class Routing {
 
@@ -28,6 +29,15 @@ public class Routing {
     router.route().last().handler(frc -> {
       frc.next();
     });
+  }
+
+  public static class Endpoints {
+    public static String ALL = "/*";
+    public static String STATUS = "/status";
+    public static String SLEEP = "/sleep/:ms";
+
+    private Endpoints() {
+    }
   }
 
 

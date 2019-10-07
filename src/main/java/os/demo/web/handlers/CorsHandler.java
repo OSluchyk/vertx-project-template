@@ -1,4 +1,4 @@
-package os.demo.web.handler;
+package os.demo.web.handlers;
 
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.vertx.core.http.HttpMethod;

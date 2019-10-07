@@ -11,9 +11,10 @@ class SuggestionsSimulator extends Simulation {
 
   val url: String = System.getProperty("url", "http://localhost:9091")
 
-  val loadTestingProfile = incrementConcurrentUsers(50)
+  val loadTestingProfile = incrementUsersPerSec(25)
     .times(100)
-    .eachLevelLasting(5 seconds)
+    .eachLevelLasting(10 seconds)
+    .separatedByRampsLasting(10 seconds)
     .startingFrom(100)
 
   def httpConfig() = http

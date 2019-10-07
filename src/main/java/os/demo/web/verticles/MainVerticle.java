@@ -1,4 +1,4 @@
-package os.demo.web;
+package os.demo.web.verticles;
 
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;

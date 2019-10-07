@@ -22,7 +22,7 @@
     <vertx.version>3.8.1</vertx.version>
     <junit-jupiter.version>5.4.0</junit-jupiter.version>
 
-    <main.verticle>os.demo.web.MainVerticle</main.verticle>
+    <main.verticle>os.demo.web.verticles.MainVerticle</main.verticle>
     <log4j.version>2.12.1</log4j.version>
   </properties>
 
@@ -49,14 +49,18 @@
     <!--    Vertx-->
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
     </dependency>
-
 
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config</artifactId>
     </dependency>
+
 
     <!--    Logging-->
     <dependency>
