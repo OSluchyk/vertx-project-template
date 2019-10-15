@@ -2,21 +2,25 @@
 
 == Building
 
-To launch your tests:
+To launch tests:
 ```
 mvn clean test
 ```
 
-To package your application:
+To package application:
 ```
 mvn clean package
 ```
 
-To run your application:
+To run application:
 ```
-mvn clean compile exec:java
+ java -jar vertx-project-template.jar  [--cluster] [--cluster-host <host>]
+       [--cluster-port <port>] [--cluster-public-host <public-host>]
+       [--cluster-public-port <public-port>] [--conf <config>]
+       [--ha] [--hagroup <group>] [--instances <instances>] [--on-redeploy
+       <cmd>]  [--options <options>] [--quorum <q>] [--redeploy <includes>]
+       [--redeploy-grace-period <period>] [--redeploy-scan-period <period>]
+       [--redeploy-termination-period <period>]  [--worker]
+
 ```
-
-
-
-
+run `*java -jar vertx-project-template.jar run --help*` to get additional information on command arguments

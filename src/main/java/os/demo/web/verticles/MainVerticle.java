@@ -23,7 +23,10 @@ public class MainVerticle extends AbstractVerticle {
           .setTcpKeepAlive(config.getTcpKeepAlive())
           .setIdleTimeout(config.getIdleTimeout())
           .setReuseAddress(config.getReuseAddress())
-          .setReusePort(config.getReusePort());
+          .setReusePort(config.getReusePort())
+          .setTcpFastOpen(true)
+          .setTcpNoDelay(true)
+          .setTcpQuickAck(true);
 
         Integer port = config.getPort();
         vertx.createHttpServer(options).requestHandler(new Routing().initRouter(vertx))

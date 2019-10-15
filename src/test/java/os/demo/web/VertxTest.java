@@ -24,10 +24,10 @@ public class VertxTest {
 
     WebClient client = WebClient.create(vertx);
 
-    client.get(8080, "localhost", "/status")
+    client.get(8080, "localhost", "/ping")
       .as(BodyCodec.string())
       .send(context.succeeding(resp -> context.verify(() -> {
-        Assertions.assertEquals("OK", resp.body());
+        Assertions.assertEquals("pong", resp.body());
         context.completeNow();
       })));
 
