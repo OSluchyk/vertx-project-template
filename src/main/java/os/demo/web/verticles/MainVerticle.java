@@ -1,15 +1,11 @@
 package os.demo.web.verticles;
 
-import io.vertx.config.ConfigRetriever;
-import io.vertx.config.ConfigRetrieverOptions;
-import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
-import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import os.demo.web.config.VerticleConfig;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -17,19 +13,19 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    configRetriever(vertx).getConfig(ar -> {
-      if (ar.failed()) {
+    VerticleConfig.get(vertx).setHandler(result -> {
+      if (result.failed()) {
         startPromise.fail("Failed to retrieve the configuration");
       } else {
-        JsonObject config = ar.result();
+        VerticleConfig config = result.result();
 
         HttpServerOptions options = new HttpServerOptions()
-          .setTcpKeepAlive(config.getBoolean("tcpKeepAlive"))
-          .setIdleTimeout(config.getInteger("idleTimeout"))
-          .setReuseAddress(config.getBoolean("reuseAddress"))
-          .setReusePort(config.getBoolean("reusePort"));
+          .setTcpKeepAlive(config.getTcpKeepAlive())
+          .setIdleTimeout(config.getIdleTimeout())
+          .setReuseAddress(config.getReuseAddress())
+          .setReusePort(config.getReusePort());
 
-        Integer port = config.getInteger("port");
+        Integer port = config.getPort();
         vertx.createHttpServer(options).requestHandler(new Routing().initRouter(vertx))
           .listen(port, http -> {
             if (http.succeeded()) {
@@ -44,22 +40,5 @@ public class MainVerticle extends AbstractVerticle {
       }
     });
 
-  }
-
-  private ConfigRetriever configRetriever(Vertx vertx) {
-    ConfigStoreOptions fileStore = new ConfigStoreOptions()
-      .setType("file")
-      .setConfig(new JsonObject().put("path", "config.json"))
-      .setOptional(true);
-
-    ConfigStoreOptions sysPropsStore = new ConfigStoreOptions().setType("sys");
-
-
-    ConfigRetrieverOptions options = new ConfigRetrieverOptions()
-      .setIncludeDefaultStores(true)
-      .addStore(fileStore)
-      .addStore(sysPropsStore);
-
-    return ConfigRetriever.create(vertx, options);
   }
 }
