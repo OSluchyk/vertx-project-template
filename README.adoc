@@ -14,7 +14,7 @@ mvn clean package
 
 To run application:
 ```
- java -jar vertx-project-template.jar  [--cluster] [--cluster-host <host>]
+ java -jar vertx-project-template.jar run [--cluster] [--cluster-host <host>]
        [--cluster-port <port>] [--cluster-public-host <public-host>]
        [--cluster-public-port <public-port>] [--conf <config>]
        [--ha] [--hagroup <group>] [--instances <instances>] [--on-redeploy
