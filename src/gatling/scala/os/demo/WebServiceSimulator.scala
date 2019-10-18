@@ -11,11 +11,7 @@ class SuggestionsSimulator extends Simulation {
 
   val url: String = System.getProperty("url", "http://localhost:9091")
 
-  val loadTestingProfile = incrementUsersPerSec(25)
-    .times(100)
-    .eachLevelLasting(10 seconds)
-    .separatedByRampsLasting(10 seconds)
-    .startingFrom(100)
+  val loadTestingProfile = rampConcurrentUsers(100) to (2000) during (120 seconds)
 
   def httpConfig() = http
     .baseUrl(url)
@@ -29,7 +25,7 @@ class SuggestionsSimulator extends Simulation {
 
   val scn: ScenarioBuilder = scenario("Suggestion API")
     .exec(
-      http("delayedService").get("/sleep/100")
+      http("delayedService").get("/sleep/1")
     )
 
   setUp(scn

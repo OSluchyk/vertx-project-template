@@ -5,7 +5,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.http.HttpServerOptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import os.demo.web.config.VerticleConfig;
+import os.demo.web.config.AppConfig;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -13,11 +13,11 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    VerticleConfig.get(vertx).setHandler(result -> {
+    AppConfig.get(vertx).setHandler(result -> {
       if (result.failed()) {
         startPromise.fail("Failed to retrieve the configuration");
       } else {
-        VerticleConfig config = result.result();
+        AppConfig config = result.result();
 
         HttpServerOptions options = new HttpServerOptions()
           .setTcpKeepAlive(config.getTcpKeepAlive())

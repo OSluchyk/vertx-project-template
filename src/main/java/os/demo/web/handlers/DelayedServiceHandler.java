@@ -4,7 +4,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 
 public class DelayedServiceHandler implements Handler<RoutingContext> {
-  private final long timeoutMs = 100;
+  private final long timeoutMs = 1;
 
   @Override
   public void handle(RoutingContext routingContext) {

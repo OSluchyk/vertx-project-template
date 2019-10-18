@@ -8,12 +8,12 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class VerticleConfig {
-  private static final Logger logger = LogManager.getLogger(VerticleConfig.class);
+public class AppConfig {
+  private static final Logger logger = LogManager.getLogger(AppConfig.class);
 
   private final JsonObject configuration;
 
-  public VerticleConfig(JsonObject configuration) {
+  public AppConfig(JsonObject configuration) {
     this.configuration = configuration;
   }
 
@@ -37,15 +37,19 @@ public class VerticleConfig {
     return configuration.getInteger("port");
   }
 
+  public boolean preferNativeTransport(){
+    return configuration.getBoolean("preferNativeTransport");
+  }
 
-  public static Future<VerticleConfig> get(Vertx vertx) {
+
+  public static Future<AppConfig> get(Vertx vertx) {
     return get(System.getProperty("config.file"), vertx);
 
   }
 
 
-  public static Future<VerticleConfig> get(String externalConfFile, Vertx vertx) {
-    Promise<VerticleConfig> future = Promise.promise();
+  public static Future<AppConfig> get(String externalConfFile, Vertx vertx) {
+    Promise<AppConfig> future = Promise.promise();
 
     ConfigRetrieverOptions options = new ConfigRetrieverOptions()
       .setIncludeDefaultStores(true);
@@ -65,7 +69,7 @@ public class VerticleConfig {
       if (ar.succeeded()) {
         JsonObject configuration = ar.result();
         logger.info("Result configuration: {}", configuration.encodePrettily());
-        future.complete(new VerticleConfig(configuration));
+        future.complete(new AppConfig(configuration));
       } else {
         logger.error("Failed to read configuration", ar.cause());
         future.fail(ar.cause());
