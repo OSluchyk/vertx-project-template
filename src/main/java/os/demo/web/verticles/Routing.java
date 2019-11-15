@@ -38,7 +38,7 @@ public class Routing {
   public static class Endpoints {
     public static String ALL = "/*";
     public static String STATUS = "/status";
-    public static String PING = "/ping";
+    public static String PING = "/plaintext";
     public static String SLEEP = "/sleep/:ms";
 
     private Endpoints() {

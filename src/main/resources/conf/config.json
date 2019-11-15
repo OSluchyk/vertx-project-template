@@ -1,7 +1,7 @@
 {
   "port": 8080,
   "idleTimeout": 20,
-  "tcpKeepAlive": true,
+  "tcpKeepAlive": false,
   "reuseAddress": true,
   "reusePort": true,
   "preferNativeTransport": true

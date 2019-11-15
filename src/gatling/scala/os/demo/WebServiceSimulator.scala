@@ -5,13 +5,14 @@ import io.gatling.core.controller.inject.open.ConstantRateOpenInjection
 import io.gatling.core.scenario.Simulation
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
+
 import scala.concurrent.duration._
 
 class SuggestionsSimulator extends Simulation {
 
   val url: String = System.getProperty("url", "http://localhost:9091")
 
-  val loadTestingProfile = rampConcurrentUsers(100) to (2000) during (120 seconds)
+  val loadTestingProfile = constantConcurrentUsers(100) during (300 seconds)
 
   def httpConfig() = http
     .baseUrl(url)
@@ -25,7 +26,7 @@ class SuggestionsSimulator extends Simulation {
 
   val scn: ScenarioBuilder = scenario("Suggestion API")
     .exec(
-      http("delayedService").get("/sleep/1")
+      http("delayedService").get("/plaintext")
     )
 
   setUp(scn

@@ -1,6 +1,5 @@
 package os.demo.web.handlers;
 
-import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -8,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 import java.io.IOException;
 import java.util.Properties;
 
-public class AppStatusHandler implements Handler<RoutingContext> {
+public class AppStatusHandler extends AbstractHandler {
   private Buffer response;
 
   public AppStatusHandler() {
@@ -20,15 +19,14 @@ public class AppStatusHandler implements Handler<RoutingContext> {
       e.printStackTrace();
     }
 
-    this.response = Buffer.buffer(new JsonObject()
+    this.response = Buffer.factory.directBuffer(new JsonObject()
       .put("version", properties.getProperty("version", "unknown"))
       .put("buildDate", properties.getProperty("build.date", "unknown"))
-      .encode());
+      .encode(), "UTF-8");
   }
 
   @Override
   public void handle(RoutingContext event) {
-
-    event.response().putHeader("content-type", "application/json").end(response);
+    event.response().putHeader(HEADER_CONTENT_TYPE, RESPONSE_TYPE_JSON).end(response);
   }
 }

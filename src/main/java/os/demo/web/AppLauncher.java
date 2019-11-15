@@ -7,6 +7,8 @@ import io.vertx.core.VertxOptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.concurrent.TimeUnit;
+
 public class AppLauncher extends Launcher {
   private static final Logger logger = LogManager.getLogger(AppLauncher.class);
 
@@ -18,11 +20,20 @@ public class AppLauncher extends Launcher {
   public void beforeStartingVertx(VertxOptions options) {
     options.setPreferNativeTransport(true);
 
-    logger.info(options.toString());
+    // warn if an event loop thread handler took more than 10ms to execute
+    options.setMaxEventLoopExecuteTime(10);
+    options.setMaxEventLoopExecuteTimeUnit(TimeUnit.MILLISECONDS);
+
+    logger.info("Vertx options: {}",options.toString());
   }
 
   @Override
   public void beforeDeployingVerticle(DeploymentOptions deploymentOptions) {
-    logger.info("Deployment Options: {}",deploymentOptions.toJson().encode());
+    int instances = deploymentOptions.getInstances();
+    if (instances < 0) {
+      instances = VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE;
+      deploymentOptions.setInstances(instances);
+    }
+    logger.info("Deployment Options: {}", deploymentOptions.toJson().encode());
   }
 }
