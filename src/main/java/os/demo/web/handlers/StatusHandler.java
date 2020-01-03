@@ -4,9 +4,9 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.ext.web.RoutingContext;
 
-public class PingHandler extends AbstractHandler {
+public class StatusHandler extends AbstractHandler {
 
-  private static final String MESSAGE = "Hello, World!";
+  private static final String MESSAGE = "OK";
   private static final Buffer MESSAGE_BUFFER = Buffer.factory.directBuffer(MESSAGE, "UTF-8");
   private static final CharSequence MESSAGE_LENGTH = HttpHeaders.createOptimized("" + MESSAGE.length());
 
@@ -17,5 +17,6 @@ public class PingHandler extends AbstractHandler {
       .putHeader(HEADER_CONTENT_LENGTH, MESSAGE_LENGTH)
       .setStatusCode(200).end(MESSAGE_BUFFER);
   }
+
 
 }

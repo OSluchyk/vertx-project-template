@@ -27,7 +27,7 @@ public class VertxTest {
     client.get(8080, "localhost", "/ping")
       .as(BodyCodec.string())
       .send(context.succeeding(resp -> context.verify(() -> {
-        Assertions.assertEquals("pong", resp.body());
+        Assertions.assertEquals("OK", resp.body());
         context.completeNow();
       })));
 

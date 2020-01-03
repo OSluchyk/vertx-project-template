@@ -10,7 +10,7 @@ import scala.concurrent.duration._
 
 class SuggestionsSimulator extends Simulation {
 
-  val url: String = System.getProperty("url", "http://localhost:9091")
+  val url: String = System.getProperty("url", "http://localhost:8080")
 
   val loadTestingProfile = constantConcurrentUsers(100) during (300 seconds)
 

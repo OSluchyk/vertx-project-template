@@ -3,7 +3,6 @@
   "idleTimeout": 20,
   "tcpKeepAlive": false,
   "reuseAddress": true,
-  "reusePort": true,
-  "preferNativeTransport": true
+  "reusePort": true
 }
 
