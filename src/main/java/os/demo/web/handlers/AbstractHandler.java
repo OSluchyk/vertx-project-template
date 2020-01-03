@@ -4,6 +4,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.ext.web.RoutingContext;
 
+@SuppressWarnings("unused")
 public abstract class AbstractHandler implements Handler<RoutingContext> {
 
     static final CharSequence HEADER_CONTENT_TYPE = HttpHeaders.createOptimized("content-type");

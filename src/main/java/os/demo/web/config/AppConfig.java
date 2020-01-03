@@ -37,10 +37,6 @@ public class AppConfig {
     return configuration.getInteger("port");
   }
 
-  public boolean preferNativeTransport(){
-    return configuration.getBoolean("preferNativeTransport");
-  }
-
 
   public static Future<AppConfig> get(Vertx vertx) {
     return get(System.getProperty("config.file"), vertx);

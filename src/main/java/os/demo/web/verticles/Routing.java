@@ -2,6 +2,7 @@ package os.demo.web.verticles;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import os.demo.web.handlers.CorsHandler;
 import os.demo.web.handlers.StatusHandler;
@@ -23,13 +24,11 @@ public class Routing {
     }
 
     private void setResourceNotFoundLogger(Router router) {
-        router.route().last().handler(frc -> {
-            frc.next();
-        });
+        router.route().last().handler(RoutingContext::next);
     }
 
     public static class Endpoints {
-        public static String ALL = "/*";
+        public static final String ALL = "/*";
 
         private Endpoints() {
         }

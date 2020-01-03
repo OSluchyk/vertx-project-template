@@ -13,8 +13,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import static io.vertx.core.http.HttpHeaders.*;
-import static io.vertx.core.http.HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
+@SuppressWarnings("SameParameterValue")
 public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
 
   private final Pattern allowedOrigin;

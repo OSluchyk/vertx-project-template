@@ -8,20 +8,26 @@ The Vert'x https://vertx.io/docs/vertx-core/java/#golden_rule[golden rule] - Don
 == Building
 
 To launch tests:
-```
+
+[source]
+----
 mvn clean test
-```
+----
 
 To package application:
-```
+
+[source]
+----
 mvn clean package
-```
+----
 
 To run application:
-```
+
+[source]
+----
  java -jar vertx-project-template.jar run [configs] os.demo.web.verticles.MainVerticle
 
-```
+----
 
 For example: `*java -jar vertx-project-template.jar run --instances 3 os.demo.web.verticles.MainVerticle*`
 
@@ -32,9 +38,10 @@ run `*java -jar vertx-project-template.jar run --help*` to get additional inform
 
 To run performance tests
 
-```
+[source]
+----
     mvn gatling:test
-```
+----
 
 == License
 
