@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 import static io.vertx.core.http.HttpHeaders.*;
 
 @SuppressWarnings("SameParameterValue")
-public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
+public class CorsHandlerImpl implements io.vertx.ext.web.handler.CorsHandler {
 
   private final Pattern allowedOrigin;
 
@@ -29,7 +29,7 @@ public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
   private final Set<String> exposedHeaders = new LinkedHashSet<>();
 
   public static io.vertx.ext.web.handler.CorsHandler configure() {
-    return new CorsHandler("*")
+    return new CorsHandlerImpl("*")
       .allowCredentials(true)
       .allowedMethod(HttpMethod.GET)
       .allowedMethod(HttpMethod.PUT)
@@ -38,7 +38,7 @@ public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
       .allowedHeader(HttpHeaderNames.CONTENT_TYPE.toString());
   }
 
-  private CorsHandler(String allowedOriginPattern) {
+  private CorsHandlerImpl(String allowedOriginPattern) {
     Objects.requireNonNull(allowedOriginPattern);
     if ("*".equals(allowedOriginPattern)) {
       allowedOrigin = null;
@@ -106,29 +106,17 @@ public class CorsHandler implements io.vertx.ext.web.handler.CorsHandler {
     HttpServerRequest request = context.request();
     HttpServerResponse response = context.response();
     String origin = context.request().headers().get(ORIGIN);
-    if (origin == null) {
-      // Not a CORS request - we don't set any headers and just call the next handler
-      context.next();
-    } else if (isValidOrigin(origin)) {
+    if (origin == null) context.next();
+    else if (isValidOrigin(origin)) {
       String accessControlRequestMethod = request.headers().get(ACCESS_CONTROL_REQUEST_METHOD);
+      addCredentialsAndOriginHeader(response, origin);
       if (request.method() == HttpMethod.OPTIONS && accessControlRequestMethod != null) {
-        // Pre-flight request
-        addCredentialsAndOriginHeader(response, origin);
-        if (allowedMethodsString != null) {
-          response.putHeader(ACCESS_CONTROL_ALLOW_METHODS, allowedMethodsString);
-        }
-        if (allowedHeadersString != null) {
-          response.putHeader(ACCESS_CONTROL_ALLOW_HEADERS, allowedHeadersString);
-        }
-        if (maxAgeSeconds != null) {
-          response.putHeader(ACCESS_CONTROL_MAX_AGE, maxAgeSeconds);
-        }
+        if (allowedMethodsString != null) response.putHeader(ACCESS_CONTROL_ALLOW_METHODS, allowedMethodsString);
+        if (allowedHeadersString != null) response.putHeader(ACCESS_CONTROL_ALLOW_HEADERS, allowedHeadersString);
+        if (maxAgeSeconds != null) response.putHeader(ACCESS_CONTROL_MAX_AGE, maxAgeSeconds);
         response.setStatusCode(204).end();
       } else {
-        addCredentialsAndOriginHeader(response, origin);
-        if (exposedHeadersString != null) {
-          response.putHeader(ACCESS_CONTROL_EXPOSE_HEADERS, exposedHeadersString);
-        }
+        if (exposedHeadersString != null) response.putHeader(ACCESS_CONTROL_EXPOSE_HEADERS, exposedHeadersString);
         context.next();
       }
     } else {
