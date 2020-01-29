@@ -24,7 +24,7 @@ class SuggestionsSimulator extends Simulation {
     .shareConnections
 
 
-  val scn: ScenarioBuilder = scenario("Suggestion API")
+  val scn: ScenarioBuilder = scenario("Basic Performance Test")
     .exec(
       http("delayedService").get("/plaintext")
     )
