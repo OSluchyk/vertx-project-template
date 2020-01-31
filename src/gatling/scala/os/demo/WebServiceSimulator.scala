@@ -8,7 +8,7 @@ import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 
-class SuggestionsSimulator extends Simulation {
+class PerformanceTest extends Simulation {
 
   val url: String = System.getProperty("url", "http://localhost:8080")
 
