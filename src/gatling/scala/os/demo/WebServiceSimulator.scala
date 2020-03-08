@@ -8,7 +8,7 @@ import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 
-class SuggestionsSimulator extends Simulation {
+class PerformanceTest extends Simulation {
 
   val url: String = System.getProperty("url", "http://localhost:8080")
 
@@ -24,7 +24,7 @@ class SuggestionsSimulator extends Simulation {
     .shareConnections
 
 
-  val scn: ScenarioBuilder = scenario("Suggestion API")
+  val scn: ScenarioBuilder = scenario("Basic Performance Test")
     .exec(
       http("delayedService").get("/plaintext")
     )
