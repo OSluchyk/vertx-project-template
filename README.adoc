@@ -1,6 +1,6 @@
 = Vertx-project-template
 
-This project template can be used to build high-throughput and configurable web services based on Vert.x event loop.
+This project template can be used to build high-throughput and configurable web services based on Vert.x.
 
 == Building
 
@@ -30,6 +30,8 @@ For example: `*java -jar vertx-project-template.jar run --instances 3 os.demo.we
 
 JVM options can be used to override default configurations. E.g.: `*java -Dport=9090 -jar vertx-project-template.jar run os.demo.web.verticles.MainVerticle*`
 
+run `*java -jar vertx-project-template.jar run --help*` to get additional information on command arguments
+
 === To run as a worker
 
 If you're going to use some blocking method directly or indirectly (IO operation, CPU intensive task, etc.), it makes sense to take a look at Vert.x blocking API and deploy verticle as a worker.
@@ -37,8 +39,6 @@ If you're going to use some blocking method directly or indirectly (IO operation
 ----
  java -jar vertx-project-template.jar run --worker --instances -1 os.demo.web.verticles.MainVerticle
 ----
-
-run `*java -jar vertx-project-template.jar run --help*` to get additional information on command arguments
 
 === To run performance tests
 
