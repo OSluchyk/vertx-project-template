@@ -2,31 +2,27 @@
 
 This project template can be used to build high-throughput and configurable web services based on Vert.x event loop.
 
-The Vert'x https://vertx.io/docs/vertx-core/java/#golden_rule[golden rule] - Don't block the event loop. So if you're going to use some blocking method directly or indirectly (IO operation, CPU intensive task, etc.)  this template probably is not for you. And you'd better look at Vert.x blocking API(workers).
-
-
 == Building
 
-To launch tests:
+=== To launch tests:
 
 [source]
 ----
 mvn clean test
 ----
 
-To package application:
+=== To package application:
 
 [source]
 ----
 mvn clean package
 ----
 
-To run application:
+=== To run application:
 
 [source]
 ----
  java -jar vertx-project-template.jar run [configs] os.demo.web.verticles.MainVerticle
-
 ----
 
 For example: `*java -jar vertx-project-template.jar run --instances 3 os.demo.web.verticles.MainVerticle*`
@@ -34,9 +30,17 @@ For example: `*java -jar vertx-project-template.jar run --instances 3 os.demo.we
 
 JVM options can be used to override default configurations. E.g.: `*java -Dport=9090 -jar vertx-project-template.jar run os.demo.web.verticles.MainVerticle*`
 
+=== To run as a worker
+
+If you're going to use some blocking method directly or indirectly (IO operation, CPU intensive task, etc.), it makes sense to take a look at Vert.x blocking API and deploy verticle as a worker.
+[source]
+----
+ java -jar vertx-project-template.jar run --worker --instances -1 os.demo.web.verticles.MainVerticle
+----
+
 run `*java -jar vertx-project-template.jar run --help*` to get additional information on command arguments
 
-To run performance tests
+=== To run performance tests
 
 [source]
 ----
