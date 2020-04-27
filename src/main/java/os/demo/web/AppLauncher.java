@@ -56,5 +56,7 @@ public class AppLauncher extends Launcher {
         }
         deploymentOptions.setInstances(instances);
         logger.info(() -> "Deployment Options: " + deploymentOptions.toJson().encode());
+        logger.info("{} VertX instances will be launched", instances);
+
     }
 }

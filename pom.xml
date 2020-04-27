@@ -211,7 +211,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>io.vertx.core.Launcher</mainClass>
+                    <mainClass>os.demo.web.AppLauncher</mainClass>
                     <arguments>
                         <argument>run</argument>
                         <argument>${main.verticle}</argument>

@@ -53,6 +53,8 @@ public abstract class BaseVerticle extends AbstractVerticle {
                         .listen(port, http -> {
                             if (http.succeeded()) {
                                 logger.info("HTTP server started on port {}", port);
+                                logger.info("Native transport is enabled: {}", vertx.isNativeTransportEnabled());
+
                                 startPromise.complete();
                             } else {
                                 logger.error("Failed to start Web Service : {}", http.cause().getMessage(), http.cause());
