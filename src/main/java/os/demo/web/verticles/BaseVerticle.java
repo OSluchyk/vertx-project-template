@@ -82,7 +82,7 @@ public abstract class BaseVerticle extends AbstractVerticle {
         allowedMethods.add(HttpMethod.OPTIONS);
         allowedMethods.add(HttpMethod.PUT);
 
-        CorsHandler corsHandler = CorsHandler.create("*")
+        CorsHandler corsHandler = CorsHandler.create(".*")
                 .allowCredentials(true)
                 .allowedHeaders(allowedHeaders)
                 .allowedMethods(allowedMethods);
