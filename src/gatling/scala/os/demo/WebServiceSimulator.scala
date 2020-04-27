@@ -14,7 +14,7 @@ class PerformanceTest extends Simulation {
    * User can specify different service location with additional JAVA_OPTS
    * e.g.: JAVA_OPTS="-Durl=http://host:port -Dusers=1000 -Dduration=8000"
    */
-  val url: String = System.getProperty("url", "http://zmachine:8080")
+  val url: String = System.getProperty("url", "http://localhost:8080")
   val nbUsers = Integer.getInteger("users", 500)
   val duration = Integer.getInteger("duration", 300)
 
