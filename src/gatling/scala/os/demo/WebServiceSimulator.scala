@@ -1,4 +1,11 @@
 
+import io.gatling.core.Predef
+import io.gatling.core.Predef._
+import io.gatling.core.controller.inject.open.ConstantRateOpenInjection
+import io.gatling.core.scenario.Simulation
+import io.gatling.core.structure.ScenarioBuilder
+import io.gatling.http.Predef._
+
 import scala.concurrent.duration._
 
 class PerformanceTest extends Simulation {
@@ -7,7 +14,7 @@ class PerformanceTest extends Simulation {
    * User can specify different service location with additional JAVA_OPTS
    * e.g.: JAVA_OPTS="-Durl=http://host:port -Dusers=1000 -Dduration=8000"
    */
-  val url: String = System.getProperty("url", "http://localhost:8080")
+  val url: String = System.getProperty("url", "http://zmachine:8080")
   val nbUsers = Integer.getInteger("users", 100)
   val duration = Integer.getInteger("duration", 300)
 
